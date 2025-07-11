@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getBinary = exports.AWSUrl = void 0;
+exports.AWSUrl = AWSUrl;
+exports.getBinary = getBinary;
 const _1 = require(".");
 const path_1 = require("path");
 const os = require("os");
+const DEFAULT_NEAR_SANDBOX_VERSION = "2.6.3";
 function getPlatform() {
     const type = os.type();
     const arch = os.arch();
@@ -18,9 +20,8 @@ function getPlatform() {
 }
 function AWSUrl() {
     const [platform, arch] = getPlatform();
-    return `https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore/${platform}-${arch}/2.0.0/near-sandbox.tar.gz`;
+    return `https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore/${platform}-${arch}/${DEFAULT_NEAR_SANDBOX_VERSION}/near-sandbox.tar.gz`;
 }
-exports.AWSUrl = AWSUrl;
 function getBinary(name = "near-sandbox") {
     if (!process.env["NEAR_SANDBOX_BIN_PATH"]) {
         process.env["NEAR_SANDBOX_BINARY_PATH"] = (0, path_1.join)(os.homedir(), ".near", "sandbox");
@@ -34,4 +35,3 @@ function getBinary(name = "near-sandbox") {
     }
     return _1.Binary.create(name, urls);
 }
-exports.getBinary = getBinary;

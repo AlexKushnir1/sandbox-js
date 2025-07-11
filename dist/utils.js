@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.rm = exports.inherit = exports.searchPath = exports.fileExists = void 0;
+exports.inherit = void 0;
+exports.fileExists = fileExists;
+exports.searchPath = searchPath;
+exports.rm = rm;
 const promises_1 = require("fs/promises");
 const path_1 = require("path");
 async function fileExists(s) {
@@ -12,7 +15,6 @@ async function fileExists(s) {
         return false;
     }
 }
-exports.fileExists = fileExists;
 async function searchPath(filename) {
     const binPath = process.env["NEAR_SANDBOX_BINARY_PATH"];
     if (binPath &&
@@ -22,7 +24,6 @@ async function searchPath(filename) {
     }
     return undefined;
 }
-exports.searchPath = searchPath;
 exports.inherit = "inherit";
 async function rm(path) {
     try {
@@ -30,4 +31,3 @@ async function rm(path) {
     }
     catch (e) { }
 }
-exports.rm = rm;
